@@ -1,0 +1,32 @@
+
+.login_container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.credentials {
+    display: flex;
+    flex-direction: column;
+    max-width: 256px;
+    gap: 8px;
+    width: 100%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.buttons {
+    display: flex;
+    gap: 4px;
+
+    button {
+        width: 100%;
+    }
+}

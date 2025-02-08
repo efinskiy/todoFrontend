@@ -1,0 +1,19 @@
+.component{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.task_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.task_status{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.task_description{
+    max-width: 768px;
+}

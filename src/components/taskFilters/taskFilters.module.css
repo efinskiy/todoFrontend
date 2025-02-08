@@ -1,0 +1,23 @@
+.component{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filters_list{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.filter{
+    display: flex;
+    flex-direction: column;
+    max-width: 256px;
+    width: 100%;
+    gap: 4px;
+}
+
+.reset_button{
+    max-width: 256px;
+}

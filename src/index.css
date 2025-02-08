@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: var(--text-primary);
+}
+
+:root{
+    --background-gray: #f1f2f6;
+    --text-primary: #333333;
+}
