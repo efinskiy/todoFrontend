@@ -86,8 +86,9 @@ export const TasksPage = () => {
                                 exit: css.taskExit,
                                 exitActive: css.taskExitActive,
                             }}
+                            unmountOnExit={true}
                         >
-                            <TaskComponent task={task} key={task.id} />
+                            <TaskComponent task={{ ...task }} />
                         </CSSTransition>
                     ))}
                 </TransitionGroup>
