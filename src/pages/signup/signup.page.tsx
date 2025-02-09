@@ -1,10 +1,7 @@
 import css from './signup.module.css';
 import { useNavigate } from 'react-router';
-import { useEffect, useState } from 'react';
-import { LoginFormError, SignupForm } from './signup.model.ts';
-import { sendSignup } from '../../api/login.ts';
-import { AxiosError } from 'axios';
-import { CommonAPIError } from '../../api/responses.ts';
+import { useState } from 'react';
+import { formOnSubmit, LoginFormError, SignupForm } from './signup.model.ts';
 
 export const SignupPage = () => {
     const [signupForm, setSignupForm] = useState<SignupForm>({
@@ -23,38 +20,6 @@ export const SignupPage = () => {
     );
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (signupForm.username.trim().length < 3) {
-            setSignupFormError((prev) => ({ ...prev, username: true }));
-        } else {
-            setSignupFormError((prev) => ({ ...prev, username: false }));
-        }
-
-        if (signupForm.password.trim().length < 5) {
-            setSignupFormError((prev) => ({ ...prev, password: true }));
-        } else {
-            setSignupFormError((prev) => ({ ...prev, password: false }));
-        }
-
-        if (
-            signupForm.password_confirmation.trim() !=
-            signupForm.password.trim()
-        ) {
-            console.log(
-                signupForm.password_confirmation != signupForm.password
-            );
-            setSignupFormError((prev) => ({
-                ...prev,
-                confirmation_error: true,
-            }));
-        } else {
-            setSignupFormError((prev) => ({
-                ...prev,
-                confirmation_error: false,
-            }));
-        }
-    }, [signupForm, signupFormError.password, signupFormError.username]);
 
     const loginOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const username = e.target.value;
@@ -77,24 +42,7 @@ export const SignupPage = () => {
             }));
         }
     };
-    const formOnSubmit = () => {
-        if (
-            !signupFormError.username &&
-            !signupFormError.password &&
-            !signupFormError.confirmation_error
-        ) {
-            sendSignup(signupForm)
-                .then((d) => {
-                    setServerResponse(d.data.msg);
-                })
-                .catch((err: AxiosError) => {
-                    if (err.status && err.response) {
-                        const response = err.response.data as CommonAPIError;
-                        setServerResponse(response.detail);
-                    }
-                });
-        }
-    };
+
     return (
         <div className={css.login_container}>
             <h3>Регистрация</h3>
@@ -129,7 +77,15 @@ export const SignupPage = () => {
                     )}
                 </div>
                 <div className={css.buttons}>
-                    <button onClick={formOnSubmit}>Зарегистрироваться</button>
+                    <button
+                        onClick={formOnSubmit(
+                            signupForm,
+                            setSignupFormError,
+                            setServerResponse
+                        )}
+                    >
+                        Зарегистрироваться
+                    </button>
                 </div>
                 <div className={css.buttons}>
                     <button onClick={() => navigate('/login')}>Назад</button>
