@@ -24,7 +24,8 @@ export const formOnSubmit =
         const invalidUsername = signupForm.username.trim().length < 3;
         const invalidPassword = signupForm.password.trim().length < 5;
         const invalidConfirmation =
-            signupForm.password === signupForm.password_confirmation;
+            signupForm.password.trim() !==
+            signupForm.password_confirmation.trim();
 
         setSignupFormError({
             password: invalidPassword,
